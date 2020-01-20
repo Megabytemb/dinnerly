@@ -28,11 +28,11 @@ class Dinnerly():
         }
         r = self.session.post(self.host + uri, body)
 
-        api_key_re = re.compile('gon\.api_token="(.+?)";')
+        api_key_re = re.compile(r'gon\.api_token="(.+?)";')
         result = api_key_re.search(r.text)
         self.apiKey = result.group(1)
 
-        user_id_re = re.compile('gon\.current_user_id=(.+?);')
+        user_id_re = re.compile(r'gon\.current_user_id=(.+?);')
         result = user_id_re.search(r.text)
         self.userId = result.group(1)
 
