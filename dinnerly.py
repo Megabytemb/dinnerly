@@ -4,6 +4,7 @@ import re
 from datetime import date
 from datetime import timedelta
 from datetime import datetime
+from cachetools import TTLCache, cached
 
 class Dinnerly():
 
@@ -41,7 +42,9 @@ class Dinnerly():
         self.user = self.getUser()
 
         return
-
+    # cache all get requests because yolo
+    # cache up to 1024 requests for 10 minutes
+    @cached(cache=TTLCache(maxsize=1024, ttl=600))
     def _get(self, url):
 
         headers = {
